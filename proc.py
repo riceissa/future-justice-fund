@@ -19,7 +19,7 @@ def main():
     print("""insert into donations (donor, donee, amount, donation_date,
     donation_date_precision, donation_date_basis, cause_area, url,
     donor_cause_area_url, notes, affected_countries, affected_states,
-    affected_cities, affected_regions) values""")
+    affected_cities, affected_regions, influencer) values""")
 
     with open("data.txt", "r") as f:
         next(f)  # skip header row
@@ -29,8 +29,10 @@ def main():
 
             if focus_area == "Criminal Justice Reform":
                 url = "https://www.futurejusticefund.org/criminaljustice"
+                influencer = "Chloe Cockburn"
             else:
                 url = "https://www.futurejusticefund.org/incomesecurity"
+                influencer = ""
 
             print(("    " if first else "    ,") + "(" + ",".join([
                 mysql_quote("Future Justice Fund"),  # donor
@@ -47,6 +49,7 @@ def main():
                 mysql_quote(""),  # affected_states
                 mysql_quote(""),  # affected_cities
                 mysql_quote(""),  # affected_regions
+                mysql_quote(influencer),  # influencer
             ]) + ")")
             first = False
         print(";")

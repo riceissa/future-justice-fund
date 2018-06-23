@@ -30,8 +30,15 @@ def main():
             if focus_area == "Criminal Justice Reform":
                 url = "https://www.futurejusticefund.org/criminaljustice"
                 influencer = "Chloe Cockburn"
+                focus_area = "Criminal justice reform"
+                affected_countries = "United States"
             else:
                 url = "https://www.futurejusticefund.org/incomesecurity"
+                if grantee == "GiveDirectly":
+                    focus_area = "Cash transfers"
+                    affected_countries = "Kenya"
+                else:
+                    affected_countries = ""
                 influencer = ""
 
             print(("    " if first else "    ,") + "(" + ",".join([
@@ -45,7 +52,7 @@ def main():
                 mysql_quote(url),  # url
                 mysql_quote(url),  # donor_cause_area_url
                 mysql_quote("For " + support_type + "." if support_type else ""),  # notes
-                mysql_quote(""),  # affected_countries
+                mysql_quote(affected_countries),  # affected_countries
                 mysql_quote(""),  # affected_states
                 mysql_quote(""),  # affected_cities
                 mysql_quote(""),  # affected_regions
